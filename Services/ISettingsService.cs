@@ -4,8 +4,8 @@ namespace Weatherproj.Services;
 
 public interface ISettingsService
 {
-    string GetCurrentCity();
-    void ChangeCurrentCity(string newCity);
-    void AddEntryToHistory(HistoryRecord record);
-    List<HistoryRecord> GetAllHistoryRecords();
+    public string GetCurrentCity();
+    public void ChangeCurrentCity(string newCity);
+    public void AddEntryToHistory(HistoryRecord record);
+    public List<HistoryRecord> GetAllHistoryRecords();
 }
