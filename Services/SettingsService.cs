@@ -8,18 +8,15 @@ public class SettingsService : ISettingsService
     private string _currentCity = "Minsk";
     private List<HistoryRecord> _history = new();
 
-    public string GetCurrentCity()
-    {
-        return _currentCity;
-    }
+    public string CurrentCity => _currentCity;
 
     public void ChangeCurrentCity(string newCity)
     {
-        if (!string.IsNullOrEmpty(newCity))
+        if (string.IsNullOrEmpty(newCity))
         {
-            _currentCity = newCity;
+            return;
         }
-        
+        _currentCity = newCity;
     }
 
     public void AddEntryToHistory(HistoryRecord record)
