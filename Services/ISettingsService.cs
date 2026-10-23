@@ -1,10 +1,10 @@
-using Weatherproj.Models;
+using weather_proj.Models;
 
-namespace Weatherproj.Services;
+namespace weather_proj.Services;
 
 public interface ISettingsService
 {
-    public string GetCurrentCity();
+    public string CurrentCity { get; }
     public void ChangeCurrentCity(string newCity);
     public void AddEntryToHistory(HistoryRecord record);
     public List<HistoryRecord> GetAllHistoryRecords();

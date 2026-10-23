@@ -1,4 +1,4 @@
-namespace  Weatherproj.Models;
+namespace  weather_proj.Models;
 
 public class AccuTemperature
 {
