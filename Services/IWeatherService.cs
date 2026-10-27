@@ -1,6 +1,6 @@
-using Weatherproj.Models;
+using weather_proj.Models;
 
-namespace Weatherproj.Services;
+namespace weather_proj.Services;
 
 public interface IWeatherService
 {
