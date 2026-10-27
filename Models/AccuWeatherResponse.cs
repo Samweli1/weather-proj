@@ -1,4 +1,4 @@
-namespace  weather_proj.Models;
+namespace weather_proj.Models;
 
 public class AccuTemperature
 {
@@ -19,7 +19,6 @@ public class AccuDayInfo
 public class AccuLocationDto
 {
     public string Key { get; set; } = string.Empty;
-    public string LocalizedName { get; set; } = string.Empty;
 }
 
 public class AccuWeatherResponse
