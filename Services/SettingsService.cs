@@ -28,6 +28,6 @@ public class SettingsService : ISettingsService
     {
         return _history;
     }
-    
+
 }
 

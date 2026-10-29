@@ -1,16 +1,15 @@
-﻿using System.Net;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using weather_proj.Services;
-using Microsoft.Extensions.Options;
 using weather_proj.Configuration;
-using Microsoft.Extensions.Configuration;
+using weather_proj.Services;
+using weather_proj.UI;
+
 
 namespace weather_proj;
 
 public class Program
 {
     public static async Task Main(string[] args)
-    
     {
         IConfiguration configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -18,27 +17,29 @@ public class Program
             .AddUserSecrets<Program>(optional: true)
             .AddEnvironmentVariables()
             .Build();
-        
+
         var services = new ServiceCollection();
         
         services.AddOptions<AccuWeatherOptions>()
             .Bind(configuration.GetSection(AccuWeatherOptions.SectionName))
-            .ValidateDataAnnotations()  
+            .ValidateDataAnnotations()
             .ValidateOnStart();
 
 
+        services.AddSingleton<ISettingsService, SettingsService>();
+        
         services.AddHttpClient<IWeatherService, WeatherService>(client =>
         {
             client.Timeout = TimeSpan.FromSeconds(10);
         });
-        services.AddSingleton<ISettingsService, SettingsService>();
-        
 
+        
+        services.AddTransient<ConsoleMenu>();
+
+        
         using ServiceProvider provider = services.BuildServiceProvider();
-        
-        await Task.CompletedTask; //заглушка чтоб компилятор не ругался
 
+        var menu = provider.GetRequiredService<ConsoleMenu>();
+        await menu.RunAsync();
     }
-
-    
 }
